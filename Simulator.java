@@ -1,9 +1,7 @@
-   
-import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Color;
+
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
@@ -19,11 +17,7 @@ public class Simulator
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
-
+    
     // List of animals in the field.
     private List<Animal> animals;
     // The current state of the field.
@@ -41,6 +35,7 @@ public class Simulator
         this(DEFAULT_DEPTH, DEFAULT_WIDTH);
     }
     
+
     /**
      * Create a simulation field with the given size.
      * @param depth Depth of the field. Must be greater than zero.
@@ -60,8 +55,6 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Rabbit.class, Color.orange);
-        view.setColor(Fox.class, Color.blue);
         
         // Setup a valid starting point.
         reset();
@@ -87,7 +80,7 @@ public class Simulator
             simulateOneStep();
         }
     }
-    
+
     /**
      * Run the simulation from its current state for a single step.
      * Iterate over the whole field updating the state of each
@@ -127,27 +120,32 @@ public class Simulator
         view.showStatus(step, field);
     }
     
-    /**
-     * Randomly populate the field with foxes and rabbits.
-     */
+   // new version of populate that uses the new createRandomAnimal() method in Animal.
     private void populate()
-    {
-        Random rand = Randomizer.getRandom();
-        field.clear();
-        for(int row = 0; row < field.getDepth(); row++) {
-            for(int col = 0; col < field.getWidth(); col++) {
-                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
-                }
-                else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
-                }
-                // else leave the location empty.
+{
+    field.clear();
+    for(int row = 0; row < field.getDepth(); row++) {
+        for(int col = 0; col < field.getWidth(); col++) {
+            Location location = new Location(row, col);
+
+            // CHANGED: no Fox/Rabbit here anymore
+            Animal animal = Animal.createRandomAnimal(field, location);
+
+            if(animal != null) {
+                animals.add(animal);
             }
         }
     }
+}
+public int getStep() {
+    return step;
+}
+
+public int getAnimalCount() {
+    return animals.size();
+}
+
+public void printStats() {
+    System.out.println("Step: " + step + " | Animals: " + animals.size());
+}
 }

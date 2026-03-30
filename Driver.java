@@ -34,13 +34,20 @@ public class Driver {
 		case ('R'): 
 			mySim.reset();
 			break;
-		case('3'):
-			mySim.simulateOneStep();
-		case('2'):
-			mySim.simulateOneStep();
+		
+		
 		case('1'):
 			mySim.simulateOneStep();
+            mySim.printStats();
 			break;
+        case('2'):
+			mySim.simulateOneStep();
+            mySim.printStats();
+            break;
+        case('3'):
+			mySim.simulateOneStep();
+            mySim.printStats();
+            break;
 		case('5'):
 			mySim.simulate(10);
 		case('4'):

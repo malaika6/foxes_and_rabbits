@@ -2,8 +2,8 @@
 //Moved age field from Fox and Rabbit to Animal.
 //Initialized it in constructor.
 //Replaced all direct access with getAge() and setAge(). 
+import java.awt.Color;
 import java.util.*;
-
 /**
  * A simple model of a fox.
  * Foxes age, move, eat rabbits, and die.
@@ -157,5 +157,10 @@ protected int getMaxLitterSize() {
 protected Animal createYoung(Field field, Location locc){
     return new Fox(false, field, locc);
 
+
+}
+// for color 
+public Color getColor() {
+    return Color.blue;
 }
 }

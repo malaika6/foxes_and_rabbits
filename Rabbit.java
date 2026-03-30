@@ -1,5 +1,5 @@
-import java.util.*;
-
+import java.awt.Color;
+import java.util.*;  
 /**
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
@@ -115,5 +115,9 @@ protected int getMaxLitterSize() {
 protected Animal createYoung(Field field, Location locc){ // this implements abstract method and returns a rabb
     return new Rabbit(false, field, locc);
     
+}
+//for color 
+public Color getColor() {
+    return Color.orange;
 }
 }

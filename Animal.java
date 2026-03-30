@@ -137,16 +137,18 @@ protected void incrementAge() {
     public abstract Color getColor();
     ///to reduce coupling in animal
     public static Animal createRandomAnimal(Field field, Location location) {
-    Random rand = new Random();
+    //Random rand = new Random();
+    //for a shared rand
+     Random rand = Randomizer.getRandom(); 
     double value = rand.nextDouble();
 
     if(value <= 0.02) {
         return new Fox(true, field, location);
     }
-    else if(value <= 0.10) {
+    else if(value <= 0.10 && value > 0.02) {
         return new Rabbit(true, field, location);
     }
-    else if(value <= 0.13) {
+    else if(value <= 0.13 && value > 0.10   ) { 
         return new Squirrel(true, field, location);
     }
     return null;

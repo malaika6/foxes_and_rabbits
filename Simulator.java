@@ -129,14 +129,14 @@ public class Simulator
             Location location = new Location(row, col);
 
             // CHANGED: no Fox/Rabbit here anymore
-            Animal animal = Animal.createRandomAnimal(field, location);
-
-            if(animal != null) {
+        Animal animal = populationGenerator.createRandomAnimal(field, location);
+         if(animal != null) {
                 animals.add(animal);
+         }
             }
         }
     }
-}
+
 public int getStep() {
     return step;
 }
